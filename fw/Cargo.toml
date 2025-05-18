@@ -1,0 +1,31 @@
+[package]
+name = "kokofw"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cortex-m = { version = "0.7.7", features = ["critical-section-single-core"] }
+cortex-m-rt = "0.7.5"
+embedded-alloc = "0.6.0"
+embedded-hal = "1.0.0"
+nb = "1.1.0"
+panic-halt = "1.0.0"
+panic-rtt-target = "0.2.0"
+rtt-target = "0.6.1"
+
+# stm32f4xx-hal = {version = "0.22.1", features = ["stm32f411", "usb_fs"]}
+# rp235x-hal = {version = "0.3.0", features = ["rt", "defmt"]}
+rp235x-hal = { path = "/home/cantu/U/Testlab/mon-rp-hal/rp-hal/rp235x-hal", features = [
+    "rt",
+    "defmt",
+] }
+usb-device = "0.3.2"
+usbd-serial = "0.2.2"
+hdsplib = { path = "../hdsplib" }
+fugit = "0.3.7"
+pio = "0.2.0"
+
+[build-dependencies]
+bindgen = "0.71.0"
+cmake = "0.1.54"
+cc = "1.0"
