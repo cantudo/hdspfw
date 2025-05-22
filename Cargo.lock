@@ -385,6 +385,7 @@ dependencies = [
  "embedded-hal 1.0.0",
  "fugit",
  "hdsplib",
+ "heapless",
  "nb 1.1.0",
  "panic-halt",
  "panic-rtt-target",
@@ -651,10 +652,14 @@ dependencies = [
 [[package]]
 name = "rp-binary-info"
 version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "88ed2051a0bf2c726df01cfce378ed8a367be2a6e402fc183857f429a346d429"
 
 [[package]]
 name = "rp-hal-common"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8288358786b1458fb2caac8c4b40fb529ef4200d6c46467e2695b7a8ba573ae8"
 dependencies = [
  "fugit",
 ]
@@ -662,6 +667,8 @@ dependencies = [
 [[package]]
 name = "rp235x-hal"
 version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e2939c82776b0b4ae110168b4298b5adf831e6cff249b057bf2a2187453b959c"
 dependencies = [
  "bitfield 0.14.0",
  "cortex-m",
@@ -697,6 +704,8 @@ dependencies = [
 [[package]]
 name = "rp235x-hal-macros"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74edd7a5979e9763bbb98e9746e711bac7464ee3397af7288e6c288ff0d3c764"
 dependencies = [
  "proc-macro2",
  "quote",

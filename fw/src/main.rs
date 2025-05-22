@@ -112,15 +112,34 @@ fn main() -> ! {
     // display.set_text("Hello, my name is Uru!");
     // display.set_text("123456789");
     // display.set_text("Bohemia Jazz Cafe, Plaza de los Lobos 11");
-    display.set_text("I can see clearly now, the rain is gone.");
+    let mut lcg = hdsplib::random::LCG::new(0x12345678);
+    
+    let mut s = heapless::String::<9>::new();
+    for i in 0..9 {
+        s.push(((lcg.next() & 0x7F) as u8) as char).unwrap();
+    }
+
+    display.set_text(&s);
 
     display.write(&mut delay);
     delay.delay_ms(150);
 
 
+
+
     loop {
-        display.scroll(&mut delay);
-        delay.delay_ms(50);
+        // display.scroll(&mut delay);
+        // delay.delay_ms(50);
+
+        display.set_text(&s);
+        display.write(&mut delay);
+        delay.delay_ms(100);
+
+
+        s.remove(0);
+        s.push(((lcg.next() & 0x7F) as u8) as char).unwrap();
+
+        // rprintln!("Random number: {}", ((lcg.next() & 0xFF) as u8) as char);
     }
 
 }

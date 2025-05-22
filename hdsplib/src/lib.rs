@@ -4,6 +4,7 @@ pub mod packet;
 pub mod cast;
 pub mod utils;
 pub mod circ_buff;
+pub mod random;
 
 // pub fn add(left: u64, right: u64) -> u64 {
 //     left + right

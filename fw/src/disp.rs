@@ -30,7 +30,6 @@ use rp235x_hal as hal;
 pub const VCOM_PERIOD_MS: u32 = 250;
 
 pub struct Display<
-    'a,
     RstPin: PinId,
     FlPin: PinId,
     A0Pin: PinId,
@@ -78,7 +77,7 @@ pub struct Display<
         Pin<D7Pin, FunctionSio<SioOutput>, PullDown>,
     >,
 
-    text: &'a str,
+    text: heapless::String<128>,
     text_scroll_pos: usize,
 }
 
@@ -106,7 +105,6 @@ impl<
         D7Pin: PinId,
     >
     Display<
-        'a,
         RstPin,
         FlPin,
         A0Pin,
@@ -164,7 +162,7 @@ impl<
             rd,
 
             data_bus: GpioBus8::new((d0, d1, d2, d3, d4, d5, d6, d7)),
-            text: "",
+            text: heapless::String::new(),
             text_scroll_pos: 0,
         }
     }
@@ -213,22 +211,25 @@ impl<
         self.wr.set_high().unwrap();
     }
 
-    pub fn set_text(&mut self, text: &'a str) {
-        self.text = text;
+    pub fn set_text<const N: usize>(&mut self, text: &heapless::String<N>) {
+        self.text.clear();
+        self.text.push_str(text).unwrap();
     }
 
     pub fn write(&mut self, delay: &mut impl embedded_hal::delay::DelayNs) {
+        let current_text = self.text.clone();
+
         let mut text = "";
         let mut empty_beginning = 0;
         if self.text_scroll_pos >= self.text.len() {
             let p = self.text_scroll_pos - self.text.len();
-            text = &self.text[0..p];
+            text = &current_text[0..p];
             empty_beginning = 8 - p;
         } else {
             if self.text_scroll_pos + 8 > self.text.len() {
-                text = &self.text[self.text_scroll_pos..];
+                text = &current_text[self.text_scroll_pos..];
             } else {
-                text = &self.text[self.text_scroll_pos..self.text_scroll_pos + 8];
+                text = &current_text[self.text_scroll_pos..self.text_scroll_pos + 8];
             }
         }
 

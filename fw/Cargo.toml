@@ -13,17 +13,13 @@ panic-halt = "1.0.0"
 panic-rtt-target = "0.2.0"
 rtt-target = "0.6.1"
 
-# stm32f4xx-hal = {version = "0.22.1", features = ["stm32f411", "usb_fs"]}
-# rp235x-hal = {version = "0.3.0", features = ["rt", "defmt"]}
-rp235x-hal = { path = "/home/cantu/U/Testlab/mon-rp-hal/rp-hal/rp235x-hal", features = [
-    "rt",
-    "defmt",
-] }
+rp235x-hal = {version = "0.3.0", features = ["rt", "defmt"]}
 usb-device = "0.3.2"
 usbd-serial = "0.2.2"
 hdsplib = { path = "../hdsplib" }
 fugit = "0.3.7"
 pio = "0.2.0"
+heapless = "0.8.0"
 
 [build-dependencies]
 bindgen = "0.71.0"
